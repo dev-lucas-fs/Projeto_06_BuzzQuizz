@@ -9,57 +9,19 @@
     <link rel="stylesheet" href="css/estilo.css" />
   </head>
   <body>
-    <div class="container-lista-quizzes">
-      <!-- PAGINA DA LISTA DE QUIZ -->
-    </div>
-    <div class="container-pagina-quizz hide">
-      <!-- PAGINA DE UM QUIZ -->
-    </div>
-    <div class="container-criar-quizz hide">
-      <!-- PAGINA CRIAR QUIZ -->
-    </div>
     <div id="app">
       <header class="BuzzQuizz__Header">
         <h1 class="Header__Title">BuzzQuizz</h1>
       </header>
       <div class="BuzzQuizz__Pages">
-        <div class="Page">
-          <button onclick="createQuizz()">Criar Quizz</button>
+        <div class="container-lista-quizzes">
+          <!-- PAGINA DA LISTA DE QUIZ -->
         </div>
-        <div class="Page hide"></div>
-        <div class="Page hide">
-          <div class="Create__Init">
-            <h1 class="Title">Comece pelo começo</h1>
-            <div class="Inputs">
-              <input
-                type="text"
-                class="BuzzQuizz__Input"
-                placeholder="Título do seu quizz"
-              />
-              <input
-                type="text"
-                class="BuzzQuizz__Input"
-                placeholder="URL da imagem do seu quizz"
-              />
-              <input
-                type="text"
-                class="BuzzQuizz__Input"
-                placeholder="Quantidade de perguntas do quizz"
-              />
-              <input
-                type="text"
-                class="BuzzQuizz__Input"
-                placeholder="Quantidade de níveis do quizz"
-              />
-            </div>
-            <button class="BuzzQuizz__Button">
-              Prosseguir pra criar perguntas
-            </button>
-          </div>
-          <div class="Create__Questions">
-            <h1 class="Title">Crie suas perguntas</h1>
-            <div class="Questions"></div>
-          </div>
+        <div class="container-pagina-quizz hide">
+          <!-- PAGINA DE UM QUIZ -->
+        </div>
+        <div class="container-criar-quizz hide">
+          <!-- PAGINA CRIAR QUIZ -->
         </div>
       </div>
     </div>
