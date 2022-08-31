@@ -1,0 +1,8 @@
+.your-quizzes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 146px auto 0px auto;
+    width: 80%;
+    height: 181px;
+}

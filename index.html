@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
+    <title>Projeto #6 - BuzzQuizz</title>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projeto #6 - BuzzQuizz</title>
     <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/estilo.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/answer-quizz.css" />
+    <link rel="stylesheet" href="css/create-quizz.css" />
+    <link rel="stylesheet" href="css/quizz-list.css">
   </head>
   <body>
     <div id="app">
-      <header class="BuzzQuizz__Header">
-        <h1 class="Header__Title">BuzzQuizz</h1>
+      <header class="buzzquizz-header">
+        <h1 class="title">BuzzQuizz</h1>
       </header>
-      <div class="BuzzQuizz__Pages">
-        <div class="container-lista-quizzes">
+
+      <div class="container-pages">
+        <div class="container-lista-quizzes hide">
           <!-- PAGINA DA LISTA DE QUIZ -->
+          <section class="your-quizzes">
+            <h3>Você não criou nenhum quizz ainda :(</h3>
+            <button>Criar quizz</button>
+          </section>
         </div>
 
         <div class="container-pagina-quizz hide">
@@ -24,10 +32,135 @@
         
         <div class="container-criar-quizz hide">
           <!-- PAGINA CRIAR QUIZ -->
+
+        <div class="container-answer-quizz hide">
+          <div class="quizz-header">
+            <h2 class="quizz-title">Titulo do quizz</h2>
+          </div>
+
+          <section class="box-quizz-questions">
+            <div class="quizz-question">
+              <div class="question-header">
+                <h3 class="question-title">Question 1</h3>
+              </div>
+              <div class="question-options">
+                <div class="question-option">
+                  <img class="option-img" src="./images/cat.png" alt="" />
+                  <span class="option-text">Option 1</span>
+                </div>
+                <div class="question-option">
+                  <img class="option-img" src="./images/frog.png" alt="" />
+                  <span class="option-text">Option 2</span>
+                </div>
+                <div class="question-option">
+                  <img class="option-img" src="./images/mouse.png" alt="" />
+                  <span class="option-text">Option 3</span>
+                </div>
+                <div class="question-option">
+                  <img class="option-img" src="./images/putorius.png" alt="" />
+                  <span class="option-text">Option 4</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="quizz-question">
+              <div class="question-header">
+                <h3 class="question-title">Question 2</h3>
+              </div>
+              <div class="question-options">
+                <div class="question-option">
+                  <img class="option-img" src="./images/cat.png" alt="" />
+                  <span class="option-text">Option 1</span>
+                </div>
+                <div class="question-option">
+                  <img class="option-img" src="./images/frog.png" alt="" />
+                  <span class="option-text">Option 2</span>
+                </div>
+                <div class="question-option">
+                  <img class="option-img" src="./images/mouse.png" alt="" />
+                  <span class="option-text">Option 3</span>
+                </div>
+                <div class="question-option">
+                  <img class="option-img" src="./images/putorius.png" alt="" />
+                  <span class="option-text">Option 4</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="quizz-answer">
+              <div class="answer-header">
+                <h3 class="answer-title">
+                  <span class="answer-level-score">XX</span>% de acerto:
+                  <span class="answer-level-text">Descricao do nivel</span>
+                </h3>
+              </div>
+              <div class="answer-body">
+                <img src="./images/answer.png" alt="" class="answer-img" />
+                <div class="answer-text">
+                  <span
+                    >Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Eveniet libero tempora repellendus ea dolore impedit dolores
+                    qui aut, pariatur inventore, corrupti iure veritatis eum non
+                    aperiam rerum illo architecto similique.</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="btns-answer-page">
+              <button class="restart-quiz-button buzzquizz-button">
+                Reiniciar Quiz
+              </button>
+              <button class="back-to-home-button">Voltar para home</button>
+            </div>
+          </section>
+        </div>
+
+        <div class="container-create-quizz hide">
+          <div class="quizz-init">
+            <h1 class="title">Comece pelo começo</h1>
+            <form class="buzzquizz-form" id="form-init">
+              <div class="buzzquizz-form-inputs">
+                <input
+                  type="text"
+                  class="buzzquizz-input"
+                  name="title"
+                  placeholder="Título do seu quizz"
+                  required
+                />
+                <input
+                  type="text"
+                  class="buzzquizz-input"
+                  name="image_url"
+                  placeholder="URL da imagem do seu quizz"
+                  required
+                />
+                <input
+                  type="number"
+                  class="buzzquizz-input"
+                  name="question"
+                  placeholder="Quantidade de perguntas do quizz"
+                  required
+                />
+                <input
+                  type="number"
+                  name="level"
+                  class="buzzquizz-input"
+                  placeholder="Quantidade de níveis do quizz"
+                  required
+                />
+              </div>
+              <button type="submit" class="buzzquizz-button">
+                Prosseguir pra criar perguntas
+              </button>
+            </form>
+          </div>
+
+          <div class="quizz-questions hide">Quizz Questions</div>
+          
         </div>
       </div>
     </div>
-    <script src="./js/CreateQuizz.js"></script>
+    <script src="./js/createQuizz.js"></script>
     <script src="./js/index.js"></script>
   </body>
 </html>
