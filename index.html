@@ -7,6 +7,7 @@
     <title>Projeto #6 - BuzzQuizz</title>
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/answer-quizz.css" />
     <link rel="stylesheet" href="css/create-quizz.css" />
   </head>
   <body>
@@ -18,10 +19,66 @@
         <div class="container-lista-quizzes hide">
           <!-- PAGINA DA LISTA DE QUIZ -->
         </div>
-        <div class="container-pagina-quizz hide">
-          <!-- PAGINA DE UM QUIZ -->
+
+        <div class="container-answer-quizz ">
+          <div class="quizz-header">
+            <h2 class="quizz-title">Titulo do quizz</h2>
+          </div>
+
+          <section class="box-quizz-questions">
+            <div class="quizz-question">
+              <div class="question-header">
+                <h3 class="question-title">Question 1</h3>
+              </div>
+              <div class="question-options">
+                <div class="question-option">
+                  <img class="option-img" src="./images/cat.png" alt="" />
+                  <span class="option-text">Option 1</span>
+                </div>
+                <div class="question-option">
+                  <img class="option-img" src="./images/frog.png" alt="" />
+                  <span class="option-text">Option 2</span>
+                </div>
+                <div class="question-option">
+                  <img class="option-img" src="./images/mouse.png" alt="" />
+                  <span class="option-text">Option 3</span>
+                </div>
+                <div class="question-option">
+                  <img class="option-img" src="./images/putorius.png" alt="" />
+                  <span class="option-text">Option 4</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="quizz-question ">
+              <div class="question-header">
+                <h3 class="question-title">Question 2</h3>
+              </div>
+              <div class="question-options">
+                <div class="question-option">
+                  <img class="option-img" src="./images/cat.png" alt="" />
+                  <span class="option-text">Option 1</span>
+                </div>
+                <div class="question-option">
+                  <img class="option-img" src="./images/frog.png" alt="" />
+                  <span class="option-text">Option 2</span>
+                </div>
+                <div class="question-option">
+                  <img class="option-img" src="./images/mouse.png" alt="" />
+                  <span class="option-text">Option 3</span>
+                </div>
+                <div class="question-option">
+                  <img class="option-img" src="./images/putorius.png" alt="" />
+                  <span class="option-text">Option 4</span>
+                </div>
+                
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
-        <div class="container-create-quizz">
+
+        <div class="container-create-quizz hide">
           <div class="quizz-init">
             <h1 class="title">Comece pelo começo</h1>
             <form class="buzzquizz-form" id="form-init">

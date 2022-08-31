@@ -1,0 +1,76 @@
+.container-answer-quizz {
+  width: 100%;
+}
+
+.container-answer-quizz .quizz-header {
+  width: 100%;
+  height: 227px;
+  background: linear-gradient(rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)),
+    url(/images/hogwarts.png);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quizz-title {
+  font-size: 39px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.box-quizz-questions {
+  width: 759px;
+  margin: 0 auto;
+}
+
+.quizz-question {
+  font-weight: 700;
+  margin-top: 42px;
+  padding: 28px 36px 0 36px;
+}
+
+.question-header {
+  width: 100%;
+  height: 138px;
+  background-color: #434ca0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.question-title {
+  font-size: 23px;
+  color: #fff;
+}
+
+.question-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding-top: 18px;
+}
+
+.question-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.option-img {
+  width: 330px;
+  height: 175px;
+}
+
+.option-text {
+  font-size: 20px;
+  color: #000;
+  margin-bottom: 18px;
+}
+
+@media screen and (min-width: 1100px) {
+}
