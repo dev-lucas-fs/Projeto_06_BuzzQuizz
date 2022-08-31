@@ -10,18 +10,55 @@
   </head>
   <body>
     <div id="app">
-      <header class="BuzzQuizz__Header">
-        <h1 class="Header__Title">BuzzQuizz</h1>
+      <header class="buzzquizz-header">
+        <h1 class="title">BuzzQuizz</h1>
       </header>
-      <div class="BuzzQuizz__Pages">
+      <div class="container-pages">
         <div class="container-lista-quizzes">
           <!-- PAGINA DA LISTA DE QUIZ -->
         </div>
         <div class="container-pagina-quizz hide">
           <!-- PAGINA DE UM QUIZ -->
         </div>
-        <div class="container-criar-quizz hide">
-          <!-- PAGINA CRIAR QUIZ -->
+        <div class="container-create-quizz hide">
+          <div class="quizz-init">
+            <h1 class="title">Comece pelo começo</h1>
+            <form class="buzzquizz-form">
+              <div class="buzzquizz-form-inputs">
+                <input
+                  type="text"
+                  class="buzzquizz-input"
+                  name="title"
+                  placeholder="Título do seu quizz"
+                  required
+                />
+                <input
+                  type="text"
+                  class="buzzquizz-input"
+                  name="image_url"
+                  placeholder="URL da imagem do seu quizz"
+                  required
+                />
+                <input
+                  type="number"
+                  class="buzzquizz-input"
+                  name="question"
+                  placeholder="Quantidade de perguntas do quizz"
+                  required
+                />
+                <input
+                  type="number"
+                  name="level"
+                  class="buzzquizz-input"
+                  placeholder="Quantidade de níveis do quizz"
+                  required
+                />
+              </div>
+              <button type="submit" class="buzzquizz-button">
+                Prosseguir pra criar perguntas
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
