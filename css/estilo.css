@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
+* {
+  box-sizing: border-box;
+}
+
 .hide {
   display: none !important;
 }
@@ -22,4 +26,16 @@
   font-size: 37px;
   color: #ffffff;
   text-align: center;
+}
+
+.buzzquizz-button {
+  width: 100%;
+  max-width: 370px;
+  background: #ec362d;
+  border-radius: 15px;
+  color: #fff5f4;
+  padding: 20px;
+  border: none;
+  outline-color: transparent;
+  font-size: 18px;
 }
