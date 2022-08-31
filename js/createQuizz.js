@@ -7,17 +7,18 @@ const quizz_config = {
 
 const isTitle = (title) => title.length >= 20 && title.length <= 65;
 const isUrl = (url) => {
-  const regexURL = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/
-  return regexURL.test(url)
-}
+  const regexURL =
+    /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/;
+  return regexURL.test(url);
+};
 const isQuestionNumber = (questionNumber) => questionNumber >= 3;
 const isLevelNumber = (levelNumber) => levelNumber >= 2;
 
 const initValidations = {
-  "title": isTitle,
-  "image_url": isUrl,
-  "question": isQuestionNumber,
-  "level": isLevelNumber,
+  title: isTitle,
+  image_url: isUrl,
+  question: isQuestionNumber,
+  level: isLevelNumber,
 };
 
 function toggleHideElement(element) {
@@ -36,11 +37,10 @@ function createInitQuizz(e) {
   );
 
   const valid = elements.filter((element) => {
-    return !initValidations[element.name](element.value)
+    return !initValidations[element.name](element.value);
   });
 
-  if (valid.length !== 0)
-    return alert("Preencha os dados corretamente");
+  if (valid.length !== 0) return alert("Preencha os dados corretamente");
 
   elements.forEach((element) => (quizz_config[element.name] = element.value));
 
