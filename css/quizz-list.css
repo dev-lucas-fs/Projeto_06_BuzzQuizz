@@ -1,7 +1,7 @@
 .no-quizzes {
-    width: 80%;
-    height: 181px;
     margin: 146px auto 77px auto;
+    width: 1051px;
+    height: 181px;
     border: 1px dashed #d5d5d5;
     border-radius: 5px;
     display: flex;
@@ -11,8 +11,8 @@
 }
 
 .no-quizzes h2 {
-    width: 250px;
     margin-bottom: 30px;
+    width: 250px;
     font-weight: 400;
     font-size: 20px;
     line-height: 23px;
@@ -33,8 +33,15 @@
 }
 
 .your-quizzes {
-    width: 80%;
     margin: 134px auto 48px auto;
+    width: 1066px;
+}
+
+.your-quizzes h2 {
+    margin-bottom: 3px;
+    margin-left: 7.5px;
+    display: flex;
+    align-items: center;
 }
 
 ion-icon[name="add-circle"] {
@@ -43,41 +50,33 @@ ion-icon[name="add-circle"] {
     color: #ec362d;
 }
 
-.your-quizzes h2 {
-    display: flex;
-    align-items: center;
-}
-
 .all-quizzes {
-    width: 80%;
     margin: 0 auto;
+    width: 1066px;
 }
 
-.all-quizzes h2,
-.your-quizzes h2 {
+.all-quizzes h2 {
+    margin-bottom: 6px;
+    margin-left: 7.5px;
+}
+
+.your-quizzes h2,
+.all-quizzes h2 {
     font-weight: 700;
     font-size: 20px;
     line-height: 23px;
     color: #000000;
 }
 
-.your-quizzes h2 {
-    margin-bottom: 3px;
-}
-
-.all-quizzes h2 {
-    margin-bottom: 6px;
-}
-
-.all-quizzes div,
-.your-quizzes div {
+.your-quizzes div,
+.all-quizzes div {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.all-quizzes div figure,
-.your-quizzes div figure {
+.your-quizzes div figure,
+.all-quizzes div figure {
     position: relative;
     margin: 6px 7.5px;
     width: 340px;
@@ -85,8 +84,8 @@ ion-icon[name="add-circle"] {
     border-radius: 5px;
 }
 
-.all-quizzes div figure::after,
-.your-quizzes div figure::after {
+.your-quizzes div figure::after,
+.all-quizzes div figure::after {
     content: "";
     position: absolute;
     top: 0;
@@ -94,24 +93,60 @@ ion-icon[name="add-circle"] {
     width: 100%;
     height: 100%;
     border-radius: 5px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.3) 65%, rgba(0, 0, 0, 0.8) 100%);
 }
 
-.all-quizzes div figure img,
-.your-quizzes div figure img {
+.your-quizzes div figure img,
+.all-quizzes div figure img {
     width: 100%;
     height: 100%;
     border-radius: 5px;
 }
 
-.all-quizzes div figure figcaption,
-.your-quizzes div figure figcaption {
+.your-quizzes div figure figcaption,
+.all-quizzes div figure figcaption {
     position: absolute;
+    z-index: 1;
     bottom: 7px;
     left: 18px;
-    z-index: 1;
+    width: 301px;
+    height: 54px;
     font-weight: 400;
     font-size: 19px;
     line-height: 22px;
     color: #ffffff;
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 1100px) {
+    .no-quizzes {
+        margin-top: 100px;
+        margin-bottom: 38px;
+        width: 90%;
+    }
+
+    .your-quizzes {
+        margin-top: 100px;
+        margin-bottom: 35px;
+        width: 90%;
+    }
+
+    .all-quizzes {
+        width: 90%;
+    }
+
+}
+
+@media (max-width: 600px) {
+    .your-quizzes h2,
+    .all-quizzes h2 {
+        margin-left: 0;
+    }
+
+    .your-quizzes div figure,
+    .all-quizzes div figure {
+        margin-right: 0;
+        margin-left: 0;
+    }
 }
