@@ -85,8 +85,10 @@ let idDelayScroll = 0;
 
 let boxQuizz;
 
+// **********************************
+// Function do Load Quizz
+// **********************************
 // loadQuizzScreen(quizzTeste);
-
 function loadQuizzScreen(quizzToAnswer) {
   const screenQuizz = document.querySelector(".container-answer-quizz");
   screenQuizz.classList.remove("hide");
@@ -136,17 +138,8 @@ function loadQuestions(question) {
   });
 }
 
-function showNextQuestion(elementToShow) {
-  clearInterval(idDelayScroll);
-  console.log(elementToShow);
-  elementToShow.scrollIntoView({
-    behavior: "smooth",
-    block: "center",
-  });
-}
-
 // **********************************
-// API GET
+// Action when select a option
 // **********************************
 function selectOptionQuestion(elementOption) {
   const parentElement = elementOption.parentElement;
@@ -168,11 +161,24 @@ function selectOptionQuestion(elementOption) {
   }
 }
 
+// Scroll to Next Question After 2s
+function showNextQuestion(elementToShow) {
+  clearInterval(idDelayScroll);
+  console.log(elementToShow);
+  elementToShow.scrollIntoView({
+    behavior: "smooth",
+    block: "center",
+  });
+}
+
+// **********************************
+// API GET
+// **********************************
 const URL_QUIZZ =
   "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/10637";
 const REQ_OK = 200;
 
-function getAQuizz(URL_QUIZZ) {
+function getOneQuizz(URL_QUIZZ) {
   const promessGetQuizz = axios.get(URL_QUIZZ);
   promessUserOn.then(loadQuizz);
 }
