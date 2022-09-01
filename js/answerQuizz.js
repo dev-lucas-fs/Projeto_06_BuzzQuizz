@@ -85,7 +85,8 @@ let idDelayScroll = 0;
 
 let boxQuizz;
 
-loadQuizzScreen(quizzTeste);
+// loadQuizzScreen(quizzTeste);
+
 function loadQuizzScreen(quizzToAnswer) {
   const screenQuizz = document.querySelector(".container-answer-quizz");
   screenQuizz.classList.remove("hide");
@@ -135,8 +136,56 @@ function loadQuestions(question) {
   });
 }
 
-// `
+function showNextQuestion(elementToShow) {
+  clearInterval(idDelayScroll);
+  console.log(elementToShow);
+  elementToShow.scrollIntoView({
+    behavior: "smooth",
+    block: "center",
+  });
+}
 
+// **********************************
+// API GET
+// **********************************
+function selectOptionQuestion(elementOption) {
+  const parentElement = elementOption.parentElement;
+  if (parentElement.classList.contains("answered")) {
+    return;
+  } else {
+    parentElement.classList.add("answered");
+
+    const optionsElments = parentElement.querySelectorAll(".question-option");
+    console.log(optionsElments[0] === elementOption);
+    optionsElments.forEach((element) => {
+      if (element !== elementOption) {
+        element.classList.add("unselected-option");
+      }
+    });
+    const nextQuestion = parentElement.parentElement.nextElementSibling;
+    console.log(nextQuestion);
+    idDelayScroll = setInterval(showNextQuestion, 2000, nextQuestion);
+  }
+}
+
+const URL_QUIZZ =
+  "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/10637";
+const REQ_OK = 200;
+
+function getAQuizz(URL_QUIZZ) {
+  const promessGetQuizz = axios.get(URL_QUIZZ);
+  promessUserOn.then(loadQuizz);
+}
+
+function loadQuizz(response) {
+  if (response.status === REQ_OK) {
+    quizzToAnswer = response.data;
+  }
+}
+
+// **********************************
+// Sketch
+// **********************************
 //   <div class="quizz-answer">
 //     <div class="answer-header">
 //       <h3 class="answer-title">
@@ -162,48 +211,3 @@ function loadQuestions(question) {
 //     <button class="back-to-home-button">Voltar para home</button>
 //   </div>
 //
-// `;
-
-function selectOptionQuestion(elementOption) {
-  const parentElement = elementOption.parentElement;
-  if (parentElement.classList.contains("answered")) {
-    return;
-  } else {
-    parentElement.classList.add("answered");
-
-    const optionsElments = parentElement.querySelectorAll(".question-option");
-    console.log(optionsElments[0] === elementOption);
-    optionsElments.forEach((element) => {
-      if (element !== elementOption) {
-        element.classList.add("unselected-option");
-      }
-    });
-    const nextQuestion = parentElement.parentElement.nextElementSibling;
-    console.log(nextQuestion);
-    idDelayScroll = setInterval(showNextQuestion, 2000, nextQuestion);
-  }
-}
-
-function showNextQuestion(elementToShow) {
-  clearInterval(idDelayScroll);
-  console.log(elementToShow);
-  elementToShow.scrollIntoView({
-    behavior: "smooth",
-    block: "center",
-  });
-}
-
-const URL_QUIZZ =
-  "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/10637";
-const REQ_OK = 200;
-
-function getAQuizz(URL_QUIZZ) {
-  const promessGetQuizz = axios.get(URL_QUIZZ);
-  promessUserOn.then(loadQuizz);
-}
-
-function loadQuizz(response) {
-  if (response.status === REQ_OK) {
-    quizzToAnswer = response.data;
-  }
-}
