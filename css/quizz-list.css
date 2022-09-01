@@ -109,7 +109,7 @@ ion-icon[name="add-circle"] {
     z-index: 1;
     bottom: 7px;
     left: 18px;
-    width: 301px;
+    right: 18px;
     height: 54px;
     font-weight: 400;
     font-size: 19px;
@@ -132,10 +132,13 @@ ion-icon[name="add-circle"] {
         width: 90%;
     }
 
+    ion-icon[name="add-circle"] {
+        margin: 0 0 0 auto;
+    }
+
     .all-quizzes {
         width: 90%;
     }
-
 }
 
 @media (max-width: 600px) {
