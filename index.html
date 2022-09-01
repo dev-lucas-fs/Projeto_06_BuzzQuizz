@@ -19,7 +19,7 @@
       </header>
 
       <div class="container-pages">
-        <div class="container-lista-quizzes">
+        <div class="container-lista-quizzes hide">
           <!-- PAGINA DA LISTA DE QUIZ -->
           <section class="no-quizzes hide">
             <h2>Você não criou nenhum quizz ainda :(</h2>
@@ -27,22 +27,36 @@
           </section>
 
           <section class="your-quizzes">
-            <h2>Seus Quizzes<ion-icon onclick="" name="add-circle"></ion-icon></h2>
+            <h2>
+              Seus Quizzes<ion-icon onclick="" name="add-circle"></ion-icon>
+            </h2>
             <div>
               <figure>
-                <img src="images/hogwarts.png" alt="Imagem não suportada ou indisponível">
+                <img
+                  src="images/hogwarts.png"
+                  alt="Imagem não suportada ou indisponível"
+                />
                 <figcaption>O quão Potterhead é você?</figcaption>
               </figure>
               <figure>
-                <img src="images/hogwarts.png" alt="Imagem não suportada ou indisponível">
+                <img
+                  src="images/hogwarts.png"
+                  alt="Imagem não suportada ou indisponível"
+                />
                 <figcaption>O quão Potterhead é você?</figcaption>
               </figure>
               <figure>
-                <img src="images/hogwarts.png" alt="Imagem não suportada ou indisponível">
+                <img
+                  src="images/hogwarts.png"
+                  alt="Imagem não suportada ou indisponível"
+                />
                 <figcaption>O quão Potterhead é você?</figcaption>
               </figure>
               <figure>
-                <img src="images/hogwarts.png" alt="Imagem não suportada ou indisponível">
+                <img
+                  src="images/hogwarts.png"
+                  alt="Imagem não suportada ou indisponível"
+                />
                 <figcaption>O quão Potterhead é você?</figcaption>
               </figure>
             </div>
@@ -52,19 +66,35 @@
             <h2>Todos os Quizzes</h2>
             <div>
               <figure>
-                <img src="images/answer.png" alt="Imagem não suportada ou indisponível">
-                <figcaption>Acerte os personagens corretos dos Simpsons e prove seu amor!</figcaption>
+                <img
+                  src="images/answer.png"
+                  alt="Imagem não suportada ou indisponível"
+                />
+                <figcaption>
+                  Acerte os personagens corretos dos Simpsons e prove seu amor!
+                </figcaption>
               </figure>
               <figure>
-                <img src="images/hogwarts.png" alt="Imagem não suportada ou indisponível">
-                <figcaption>Acerte os personagens corretos dos Simpsons e prove seu amor!</figcaption>
+                <img
+                  src="images/hogwarts.png"
+                  alt="Imagem não suportada ou indisponível"
+                />
+                <figcaption>
+                  Acerte os personagens corretos dos Simpsons e prove seu amor!
+                </figcaption>
               </figure>
               <figure>
-                <img src="images/cat.png" alt="Imagem não suportada ou indisponível">
+                <img
+                  src="images/cat.png"
+                  alt="Imagem não suportada ou indisponível"
+                />
                 <figcaption>O quão Potterhead é você?</figcaption>
               </figure>
               <figure>
-                <img src="images/hogwarts.png" alt="Imagem não suportada ou indisponível">
+                <img
+                  src="images/hogwarts.png"
+                  alt="Imagem não suportada ou indisponível"
+                />
                 <figcaption>O quão Potterhead é você?</figcaption>
               </figure>
             </div>
@@ -82,19 +112,31 @@
                 <h3 class="question-title">Question 1</h3>
               </div>
               <div class="question-options">
-                <div class="question-option">
+                <div
+                  class="question-option"
+                  onclick="selectOptionQuestion(this)"
+                >
                   <img class="option-img" src="./images/cat.png" alt="" />
                   <span class="option-text">Option 1</span>
                 </div>
-                <div class="question-option">
+                <div
+                  class="question-option"
+                  onclick="selectOptionQuestion(this)"
+                >
                   <img class="option-img" src="./images/frog.png" alt="" />
                   <span class="option-text">Option 2</span>
                 </div>
-                <div class="question-option">
+                <div
+                  class="question-option"
+                  onclick="selectOptionQuestion(this)"
+                >
                   <img class="option-img" src="./images/mouse.png" alt="" />
                   <span class="option-text">Option 3</span>
                 </div>
-                <div class="question-option">
+                <div
+                  class="question-option"
+                  onclick="selectOptionQuestion(this)"
+                >
                   <img class="option-img" src="./images/putorius.png" alt="" />
                   <span class="option-text">Option 4</span>
                 </div>
@@ -103,22 +145,70 @@
 
             <div class="quizz-question">
               <div class="question-header">
-                <h3 class="question-title">Question 2</h3>
+                <h3 class="question-title">Question 1</h3>
               </div>
               <div class="question-options">
-                <div class="question-option">
+                <div
+                  class="question-option"
+                  onclick="selectOptionQuestion(this)"
+                >
                   <img class="option-img" src="./images/cat.png" alt="" />
                   <span class="option-text">Option 1</span>
                 </div>
-                <div class="question-option">
+                <div
+                  class="question-option"
+                  onclick="selectOptionQuestion(this)"
+                >
                   <img class="option-img" src="./images/frog.png" alt="" />
                   <span class="option-text">Option 2</span>
                 </div>
-                <div class="question-option">
+                <div
+                  class="question-option"
+                  onclick="selectOptionQuestion(this)"
+                >
                   <img class="option-img" src="./images/mouse.png" alt="" />
                   <span class="option-text">Option 3</span>
                 </div>
-                <div class="question-option">
+                <div
+                  class="question-option"
+                  onclick="selectOptionQuestion(this)"
+                >
+                  <img class="option-img" src="./images/putorius.png" alt="" />
+                  <span class="option-text">Option 4</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="quizz-question">
+              <div class="question-header">
+                <h3 class="question-title">Question 1</h3>
+              </div>
+              <div class="question-options">
+                <div
+                  class="question-option"
+                  onclick="selectOptionQuestion(this)"
+                >
+                  <img class="option-img" src="./images/cat.png" alt="" />
+                  <span class="option-text">Option 1</span>
+                </div>
+                <div
+                  class="question-option"
+                  onclick="selectOptionQuestion(this)"
+                >
+                  <img class="option-img" src="./images/frog.png" alt="" />
+                  <span class="option-text">Option 2</span>
+                </div>
+                <div
+                  class="question-option"
+                  onclick="selectOptionQuestion(this)"
+                >
+                  <img class="option-img" src="./images/mouse.png" alt="" />
+                  <span class="option-text">Option 3</span>
+                </div>
+                <div
+                  class="question-option"
+                  onclick="selectOptionQuestion(this)"
+                >
                   <img class="option-img" src="./images/putorius.png" alt="" />
                   <span class="option-text">Option 4</span>
                 </div>
@@ -134,14 +224,12 @@
               </div>
               <div class="answer-body">
                 <img src="./images/answer.png" alt="" class="answer-img" />
-                <div class="answer-text">
-                  <span
-                    >Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Eveniet libero tempora repellendus ea dolore impedit dolores
-                    qui aut, pariatur inventore, corrupti iure veritatis eum non
-                    aperiam rerum illo architecto similique.</span
-                  >
-                </div>
+                <span class="answer-text">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Eveniet libero tempora repellendus ea dolore impedit dolores
+                  qui aut, pariatur inventore, corrupti iure veritatis eum non
+                  aperiam rerum illo architecto similique.
+                </span>
               </div>
             </div>
             <div class="btns-answer-page">
@@ -198,8 +286,15 @@
       </div>
     </div>
 
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="./js/answerQuizz.js"></script>
     <script src="./js/createQuizz.js"></script>
     <script src="./js/index.js"></script>
   </body>

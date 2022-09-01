@@ -4,13 +4,17 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 10px;
+}
+
 .hide {
   display: none !important;
 }
 
 body {
   background: #fafafa;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 /* #app {
@@ -49,7 +53,12 @@ body {
   outline-color: transparent;
   font-size: 18px;
 }
-  
+
 .container-pages {
+  width: 100%;
   margin-top: 69px;
+}
+
+#app {
+  width: 100vw;
 }
