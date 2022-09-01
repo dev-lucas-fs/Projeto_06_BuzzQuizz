@@ -5,11 +5,6 @@
 .container-answer-quizz .quizz-header {
   width: 100%;
   height: 227px;
-  background: linear-gradient(rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)),
-    url(/images/hogwarts.png);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,7 +55,7 @@
   color: #fff;
 }
 
-.question-options,
+.box-question-options,
 .answer-body {
   display: flex;
   justify-content: space-between;
