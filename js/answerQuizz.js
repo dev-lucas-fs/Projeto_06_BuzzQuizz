@@ -89,13 +89,13 @@ let correctQuizzAnswers = [];
 let numberOfQuestions = 0;
 let numberOfQuestionsAnswered = 0;
 let scoreQuizz = 0;
-let quizzIsAnswered = false;
+let quizzToAnswer = quizzTeste;
 
 // **********************************
 // Function do Load Quizz
 // **********************************
-// loadQuizzScreen(quizzTeste);
-function loadQuizzScreen(quizzToAnswer) {
+// loadQuizzScreen();
+function loadQuizzScreen() {
   console.log("Executando funcao loadQuizzScreen");
   const screenQuizz = document.querySelector(".container-answer-quizz");
   screenQuizz.classList.remove("hide");
@@ -108,12 +108,19 @@ function loadQuizzScreen(quizzToAnswer) {
 
   //Show Header Quizz
   screenQuizz.innerHTML = `
-    <div class="quizz-header" id="quizz-header">
-        <h2 class="quizz-title">${quizzToAnswer.title}</h2>
-    </div>
-    <section class="box-quizz-questions">
-    </section>
-    `;
+  <div class="quizz-header" id="quizz-header">
+    <h2 class="quizz-title">${quizzToAnswer.title}</h2>
+  </div>
+  <section class="box-quizz-questions">
+  </section>
+  `;
+
+  // Scroll to page header
+  screenQuizz.firstElementChild.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+
   // Header Quizz background properties
   const imgBackground = document.getElementById("quizz-header");
   imgBackground.style.background = `linear-gradient(rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)), url(${quizzToAnswer.image})`;
@@ -124,27 +131,38 @@ function loadQuizzScreen(quizzToAnswer) {
 
   // console.log(quizzToAnswer.questions);
   boxQuizz = document.querySelector(".box-quizz-questions");
+
+  // Set global variables to default
   correctQuizzAnswers = [];
   numberOfQuestions = quizzToAnswer.questions.length;
   numberOfQuestionsAnswered = 0;
   scoreQuizz = 0;
-  quizzIsAnswered = false;
-  // console.log(numberOfQuestions);
+
+  // Render Question
   quizzToAnswer.questions.forEach(loadQuestions);
-  console.log(correctQuizzAnswers);
-  loadResult(quizzToAnswer.levels);
+
+  // Change Questions headers background color
+  const questionHeaders = document.querySelectorAll(".question-header");
+  questionHeaders.forEach((elementHeader, headerNumber) => {
+    elementHeader.style.backgroundColor =
+      quizzToAnswer.questions[headerNumber].color;
+  });
+
+  // console.log(correctQuizzAnswers);
+  loadResult();
 }
 
 function loadQuestions(question, questionNumber) {
   boxQuizz.innerHTML += `
   <div class="quizz-question">
-    <div class="question-header">
+    <div class="question-header question-${questionNumber}">
       <h3 class="question-title">${question.title}</h3>
     </div>
     <div class="box-question-options">      
     </div>
   </div>
   `;
+
   const boxOptions = boxQuizz.lastElementChild.querySelector(
     ".box-question-options"
   );
@@ -164,32 +182,41 @@ function loadQuestions(question, questionNumber) {
   correctQuizzAnswers.push(correctQuestionAnswers);
 }
 
-function loadResult(result) {
+function loadResult() {
   boxQuizz.innerHTML += `
   <div class="box-answer hide">
     <div class="quizz-answer">
       <div class="answer-header">
         <h3 class="answer-title">
-          <span class="answer-level-score">${scoreQuizz}</span>% de acerto:
-          <span class="answer-level-text">${result[0].title}</span>
         </h3>
       </div>
       <div class="answer-body">
-        <img src=${result[0].image} alt="" class="answer-img" />
+        <img src="" alt="" class="answer-img" />
         <span class="answer-text">
-          ${result[0].text}
         </span>
       </div>
     </div>
 
     <div class="btns-answer-page">
-      <button class="restart-quiz-button buzzquizz-button">
+      <button class="restart-quiz-button buzzquizz-button" onclick="loadQuizzScreen()">
         Reiniciar Quiz
       </button>
-      <button class="back-to-home-button">Voltar para home</button>
+      <button class="back-to-home-button" onclick="loadHomeScreen()">Voltar para home</button>
     </div>
   </div>
   `;
+}
+
+function loadHomeScreen() {
+  console.log("Executando funcao loadQuizzScreen");
+  const screenList = document.querySelector(".container-list-quizzes");
+  screenList.classList.remove("hide");
+
+  const screenQuizz = document.querySelector(".container-answer-quizz");
+  screenQuizz.classList.add("hide");
+
+  const screenCreate = document.querySelector(".container-create-quizz");
+  screenCreate.classList.add("hide");
 }
 
 // **********************************
@@ -233,15 +260,37 @@ function selectOptionQuestion(elementOption) {
     });
 
     if (numberOfQuestionsAnswered === numberOfQuestions) {
-      quizzIsAnswered = true;
+      scoreQuizz = Math.round((scoreQuizz / numberOfQuestions) * 100);
+      refreshResult();
       document.querySelector(".box-answer").classList.remove("hide");
     }
 
-    console.log(scoreQuizz);
+    // console.log(scoreQuizz);
     const nextQuestion = parentElement.parentElement.nextElementSibling;
-    console.log(nextQuestion);
+    // console.log(nextQuestion);
     idDelayScroll = setInterval(showNextQuestion, 2000, nextQuestion);
   }
+}
+
+function refreshResult() {
+  let userLevel = 0;
+
+  // console.log(quizzToAnswer.levels[0].minValue);
+  quizzToAnswer.levels.forEach((level, index) => {
+    if (scoreQuizz >= level.minValue) {
+      userLevel = index;
+      // console.log(level.minValue);
+    }
+  });
+
+  document.querySelector(".answer-title").innerHTML = `
+    <span class="answer-level-score">${scoreQuizz}</span>% de acerto:
+    <span class="answer-level-text">${quizzToAnswer.levels[userLevel].title}</span>  
+    `;
+  document.querySelector(".answer-img").src =
+    quizzToAnswer.levels[userLevel].image;
+  document.querySelector(".answer-text").innerHTML =
+    quizzToAnswer.levels[userLevel].text;
 }
 
 // Scroll to Next Question After 2s
@@ -263,11 +312,12 @@ const REQ_OK = 200;
 
 function getOneQuizz(URL_QUIZZ) {
   const promessGetQuizz = axios.get(URL_QUIZZ);
-  promessUserOn.then(loadQuizz);
+  promessGetQuizz.then(loadQuizz);
 }
 
 function loadQuizz(response) {
   if (response.status === REQ_OK) {
     quizzToAnswer = response.data;
+    loadQuizzScreen();
   }
 }
