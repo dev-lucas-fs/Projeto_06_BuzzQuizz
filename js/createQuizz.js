@@ -1,12 +1,4 @@
-const quizz_config = {
-  questions: [
-    {
-      title: "",
-      color: "",
-      answers: [],
-    },
-  ],
-};
+let quizz_config = {};
 
 const isTitle = (title) => title.length >= 20 && title.length <= 65;
 const isUrl = (url) => {
@@ -106,7 +98,7 @@ const isBackgroundColor = (color) => {
   color = color.trim();
   color = color.split("");
   if (color[0] !== "#") return false;
-  if (!(color.length > 3 && color.length < 8)) return false;
+  if (!(color.length === 7)) return false;
   for (let i = 1; i < color.length; i++)
     if (!permittedChars.includes(color[i])) return false;
 
@@ -138,7 +130,7 @@ const questionForm = ({ i }) => `
     }' data-identifier="question-form">
       <div class='container-title'>
         <h1 class='title'>Pergunta ${i}</h1>
-        <ion-icon onclick='questionExpandButton(this)' data-identifier="expand" class='icon' name="create-outline"></ion-icon>
+        <ion-icon onclick='expandButton(this)' data-identifier="expand" class='icon' name="create-outline"></ion-icon>
       </div>
       <div class='question'>
         ${buzzquizzInput({
@@ -190,7 +182,7 @@ const questionForm = ({ i }) => `
     </div>
 `;
 
-function questionExpandButton(e) {
+function expandButton(e) {
   const parent = e.parentNode.parentNode;
   const form = document.querySelectorAll("#form-question > .container");
   form.forEach((element) => {
@@ -267,6 +259,7 @@ function showQuizzLevels() {
     page.classList.add("hide");
   });
   document.querySelector(".quizz-levels").classList.remove("hide");
+  renderLevelsForm();
 }
 
 formQuestion.onsubmit = (e) => {
@@ -287,3 +280,134 @@ formQuestion.onsubmit = (e) => {
   quizz_config.questions = questions;
   showQuizzLevels();
 };
+
+const formLevel = document.querySelector("#form-level");
+
+const buzzquizzTextArea = ({ placeholder, dataName = "" }) => `
+  <textarea 
+    class='buzzquizz-input' 
+    placeholder='${placeholder}'
+    data-name='${dataName}'
+  ></textarea>
+`;
+
+function levelForm({ i }) {
+  return `
+    <div class='container ${i === 1 ? "" : "close"}'>
+      <div class='container-title'>
+        <h1 class='title'>Nível ${i}</h1>
+        <ion-icon onclick='expandButton(this)' data-identifier="expand" class='icon' name="create-outline"></ion-icon>
+      </div>
+      ${buzzquizzInput({ placeholder: "Título do nível", dataName: "title" })}
+      ${buzzquizzInput({
+        placeholder: "% de acerto mínima",
+        dataName: "min-value",
+      })}
+      ${buzzquizzInput({
+        placeholder: "URL da imagem do nível",
+        dataName: "image",
+      })}
+      ${buzzquizzTextArea({
+        placeholder: "Descrição do nível",
+        dataName: "text",
+      })}
+    </div>
+  `;
+}
+
+function renderLevelsForm() {
+  formLevel.innerHTML = "";
+  quizz_config.levels.forEach((level, i) => {
+    formLevel.innerHTML += levelForm({ i: i + 1 });
+  });
+  formLevel.innerHTML += `
+    <button class='buzzquizz-button'>Finalizar Quizz</button>
+  `;
+}
+
+const isLevelTitle = (text) => text.trim().length >= 10;
+
+const isLevelMinValue = (number) => number >= 0 && number <= 100;
+
+const isDescriptionLevel = (text) => text.trim().length >= 30;
+
+function isLevelForm(levelForm) {
+  const title = levelForm.querySelector('input[data-name="title"]');
+  const image = levelForm.querySelector('input[data-name="image"]');
+  const text = levelForm.querySelector('textarea[data-name="text"]');
+  const minValue = levelForm.querySelector('input[data-name="min-value"]');
+  console.log(title);
+  if (
+    !(
+      isLevelTitle(title.value) &&
+      isLevelMinValue(minValue.value) &&
+      isDescriptionLevel(text.value) &&
+      isUrl(image.value)
+    )
+  )
+    return false;
+
+  return {
+    title: title.value,
+    image: image.value,
+    text: text.value,
+    minValue: Number(minValue.value),
+  };
+}
+
+formLevel.onsubmit = (e) => {
+  e.preventDefault();
+  let levels = [];
+  const inputsContainer = formLevel.querySelectorAll(".container");
+
+  for (let i = 0; i < inputsContainer.length; i++) {
+    const level = isLevelForm(inputsContainer[i]);
+
+    if (!level) {
+      alert("Preencha os dados corretamente");
+      levels = [];
+      return;
+    }
+
+    levels.push(level);
+  }
+
+  const minValues = levels.map(({ minValue }) => minValue);
+  const UniqueMinValues = minValues.filter(
+    (value, i, array) => array.indexOf(value) === i
+  );
+
+  if (minValues.length !== UniqueMinValues.length) {
+    alert("Preencha os dados corretamente");
+    return;
+  }
+
+  if (!minValues.includes(0)) {
+    alert("Preencha os dados corretamente");
+    return;
+  }
+
+  quizz_config.levels = levels;
+  createQuizzAPI((res) => {
+    const items = localStorage.quizzes ? JSON.parse(localStorage.quizzes) : [];
+    items.push(res.data);
+    localStorage.setItem("quizzes", JSON.stringify(items));
+    showSuccessQuizz();
+  });
+};
+
+function showSuccessQuizz() {
+  document.querySelector(".quizz-levels").classList.add("hide");
+  document.querySelector(".quizz-success").classList.remove("hide");
+}
+
+function createQuizzAPI(fn) {
+  const URL = "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes";
+
+  axios
+    .post(URL, quizz_config)
+    .then((res) => {
+      fn(res);
+    })
+    .catch((e) => console.log(e));
+}

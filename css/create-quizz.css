@@ -119,6 +119,60 @@
   display: none;
 }
 
+.quizz-levels {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.quizz-levels #form-level {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+}
+
+
+
+.quizz-levels #form-level .container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+  gap: 10px;
+}
+
+.quizz-levels #form-level .container .container-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quizz-levels #form-level .container .container-title .icon {
+  display: none;
+  font-size: 26px;
+  color: #000;
+}
+
+.quizz-levels #form-level .container.close .container-title .icon  {
+  display: initial;
+}
+
+.quizz-levels #form-level .container.close > div:not(:first-child){
+  display: none;
+}
+
+.quizz-levels #form-level textarea {
+  height: 200px;
+  resize: vertical
+}
+
+.quizz-levels {
+  gap: 20px;
+}
 
 @media screen and (min-width: 1100px) {
   .container-create-quizz .quizz-init {
@@ -134,6 +188,10 @@
   }
 
   .container-create-quizz .quizz-questions {
+    max-width: 600px;
+  }
+
+  .container-create-quizz .quizz-levels {
     max-width: 600px;
   }
 }
