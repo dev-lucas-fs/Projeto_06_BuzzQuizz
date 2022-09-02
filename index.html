@@ -118,20 +118,20 @@
                 <input
                   type="text"
                   class="buzzquizz-input"
-                  name="image_url"
+                  name="image"
                   placeholder="URL da imagem do seu quizz"
                   required
                 />
                 <input
                   type="number"
                   class="buzzquizz-input"
-                  name="question"
+                  name="questions"
                   placeholder="Quantidade de perguntas do quizz"
                   required
                 />
                 <input
                   type="number"
-                  name="level"
+                  name="levels"
                   class="buzzquizz-input"
                   placeholder="Quantidade de níveis do quizz"
                   required
@@ -143,11 +143,18 @@
             </form>
           </div>
 
-          <div class="quizz-questions hide">Quizz Questions</div>
+          <div class="quizz-questions hide">
+            <h1 class="title">Crie suas perguntas</h1>
+            <form class="buzzquizz-form" id="form-question"></form>
+          </div>
+          
+          <div class="quizz-levels hide">
+            Quizz Levels
+          </div>
+
         </div>
       </div>
     </div>
-
     <script
       type="module"
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
@@ -156,6 +163,7 @@
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./js/answerQuizz.js"></script>
     <script src="./js/createQuizz.js"></script>
     <script src="./js/index.js"></script>
