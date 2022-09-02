@@ -85,13 +85,26 @@ let idDelayScroll = 0;
 
 let boxQuizz;
 
+let correctQuizzAnswers = [];
+let numberOfQuestions = 0;
+let numberOfQuestionsAnswered = 0;
+let scoreQuizz = 0;
+let quizzIsAnswered = false;
+
 // **********************************
 // Function do Load Quizz
 // **********************************
 // loadQuizzScreen(quizzTeste);
 function loadQuizzScreen(quizzToAnswer) {
+  console.log("Executando funcao loadQuizzScreen");
   const screenQuizz = document.querySelector(".container-answer-quizz");
   screenQuizz.classList.remove("hide");
+
+  const screenList = document.querySelector(".container-list-quizzes");
+  screenList.classList.add("hide");
+
+  const screenCreate = document.querySelector(".container-create-quizz");
+  screenCreate.classList.add("hide");
 
   //Show Header Quizz
   screenQuizz.innerHTML = `
@@ -101,7 +114,6 @@ function loadQuizzScreen(quizzToAnswer) {
     <section class="box-quizz-questions">
     </section>
     `;
-
   // Header Quizz background properties
   const imgBackground = document.getElementById("quizz-header");
   imgBackground.style.background = `linear-gradient(rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)), url(${quizzToAnswer.image})`;
@@ -110,12 +122,20 @@ function loadQuizzScreen(quizzToAnswer) {
   imgBackground.style.backgroundSize = "cover";
   imgBackground.style.backgroundPosition = "center";
 
-  console.log(quizzToAnswer.questions);
+  // console.log(quizzToAnswer.questions);
   boxQuizz = document.querySelector(".box-quizz-questions");
+  correctQuizzAnswers = [];
+  numberOfQuestions = quizzToAnswer.questions.length;
+  numberOfQuestionsAnswered = 0;
+  scoreQuizz = 0;
+  quizzIsAnswered = false;
+  // console.log(numberOfQuestions);
   quizzToAnswer.questions.forEach(loadQuestions);
+  console.log(correctQuizzAnswers);
+  loadResult(quizzToAnswer.levels);
 }
 
-function loadQuestions(question) {
+function loadQuestions(question, questionNumber) {
   boxQuizz.innerHTML += `
   <div class="quizz-question">
     <div class="question-header">
@@ -128,14 +148,48 @@ function loadQuestions(question) {
   const boxOptions = boxQuizz.lastElementChild.querySelector(
     ".box-question-options"
   );
-  question.answers.sort(comparador).forEach((option, index) => {
+
+  const correctQuestionAnswers = [];
+  question.answers.sort(comparador).forEach((option, optionNumber) => {
     boxOptions.innerHTML += `
-    <div class="question-option" onclick="selectOptionQuestion(this)">
+    <div class="question-option ${questionNumber} option-${optionNumber}" onclick="selectOptionQuestion(this)">
       <img class="option-img" src=${option.image} alt="" />
       <span class="option-text">${option.text}</span>
     </div>
     `;
+    if (option.isCorrectAnswer) {
+      correctQuestionAnswers.push(optionNumber);
+    }
   });
+  correctQuizzAnswers.push(correctQuestionAnswers);
+}
+
+function loadResult(result) {
+  boxQuizz.innerHTML += `
+  <div class="box-answer hide">
+    <div class="quizz-answer">
+      <div class="answer-header">
+        <h3 class="answer-title">
+          <span class="answer-level-score">${scoreQuizz}</span>% de acerto:
+          <span class="answer-level-text">${result[0].title}</span>
+        </h3>
+      </div>
+      <div class="answer-body">
+        <img src=${result[0].image} alt="" class="answer-img" />
+        <span class="answer-text">
+          ${result[0].text}
+        </span>
+      </div>
+    </div>
+
+    <div class="btns-answer-page">
+      <button class="restart-quiz-button buzzquizz-button">
+        Reiniciar Quiz
+      </button>
+      <button class="back-to-home-button">Voltar para home</button>
+    </div>
+  </div>
+  `;
 }
 
 // **********************************
@@ -143,18 +197,47 @@ function loadQuestions(question) {
 // **********************************
 function selectOptionQuestion(elementOption) {
   const parentElement = elementOption.parentElement;
+  // Allow only one attempt
   if (parentElement.classList.contains("answered")) {
     return;
   } else {
     parentElement.classList.add("answered");
+    numberOfQuestionsAnswered++;
 
-    const optionsElments = parentElement.querySelectorAll(".question-option");
-    console.log(optionsElments[0] === elementOption);
-    optionsElments.forEach((element) => {
+    // Get the question of the selected option
+    let questionSelected;
+    for (let i = 0; i < numberOfQuestions; i++) {
+      if (elementOption.classList.contains(i)) {
+        questionSelected = i;
+        break;
+      }
+    }
+    // console.log(questionSelected);
+
+    const optionsElements = parentElement.querySelectorAll(".question-option");
+    optionsElements.forEach((element, optionNumber) => {
+      // Show correct and wrong answer
+      if (correctQuizzAnswers[questionSelected].includes(optionNumber)) {
+        element.classList.add("right-option");
+        if (element === elementOption) {
+          scoreQuizz++;
+        }
+      } else {
+        element.classList.add("wrong-option");
+      }
+
+      // Apply opactity in inselected option
       if (element !== elementOption) {
         element.classList.add("unselected-option");
       }
     });
+
+    if (numberOfQuestionsAnswered === numberOfQuestions) {
+      quizzIsAnswered = true;
+      document.querySelector(".box-answer").classList.remove("hide");
+    }
+
+    console.log(scoreQuizz);
     const nextQuestion = parentElement.parentElement.nextElementSibling;
     console.log(nextQuestion);
     idDelayScroll = setInterval(showNextQuestion, 2000, nextQuestion);
@@ -164,7 +247,7 @@ function selectOptionQuestion(elementOption) {
 // Scroll to Next Question After 2s
 function showNextQuestion(elementToShow) {
   clearInterval(idDelayScroll);
-  console.log(elementToShow);
+  // console.log(elementToShow);
   elementToShow.scrollIntoView({
     behavior: "smooth",
     block: "center",
@@ -188,32 +271,3 @@ function loadQuizz(response) {
     quizzToAnswer = response.data;
   }
 }
-
-// **********************************
-// Sketch
-// **********************************
-//   <div class="quizz-answer">
-//     <div class="answer-header">
-//       <h3 class="answer-title">
-//         <span class="answer-level-score">XX</span>% de acerto:
-//         <span class="answer-level-text">Descricao do nivel</span>
-//       </h3>
-//     </div>
-//     <div class="answer-body">
-//       <img src="./images/answer.png" alt="" class="answer-img" />
-//       <span class="answer-text">
-//         Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-//         Eveniet libero tempora repellendus ea dolore impedit dolores
-//         qui aut, pariatur inventore, corrupti iure veritatis eum non
-//         aperiam rerum illo architecto similique.
-//       </span>
-//     </div>
-//   </div>
-
-//   <div class="btns-answer-page">
-//     <button class="restart-quiz-button buzzquizz-button">
-//       Reiniciar Quiz
-//     </button>
-//     <button class="back-to-home-button">Voltar para home</button>
-//   </div>
-//
