@@ -4,28 +4,42 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 10px;
+}
+
 .hide {
   display: none !important;
 }
 
-#app {
+body {
+  background: #fafafa;
+  font-family: "Roboto", sans-serif;
+}
+
+/* #app {
   min-height: 100vh;
   background: #fafafa;
   font-family: "Roboto";
-}
+} */
 
 .buzzquizz-header {
+  position: fixed;
+  top: 0;
+  z-index: 10;
   width: 100%;
-  padding: 20px 0;
+  height: 69px;
+  display: flex;
   background: #ec362d;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .buzzquizz-header .title {
+  margin: auto auto;
   font-weight: bold;
   font-size: 37px;
+  line-height: 43px;
   color: #ffffff;
-  text-align: center;
 }
 
 .buzzquizz-button {
@@ -38,4 +52,13 @@
   border: none;
   outline-color: transparent;
   font-size: 18px;
+}
+
+.container-pages {
+  width: 100%;
+  margin-top: 69px;
+}
+
+#app {
+  width: 100vw;
 }

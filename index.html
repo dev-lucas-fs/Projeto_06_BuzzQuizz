@@ -1,27 +1,109 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
+    <title>BuzzQuizz</title>
+    <link rel="icon" type="image/images" href="images/buzzquizz.png" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projeto #6 - BuzzQuizz</title>
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/answer-quizz.css" />
     <link rel="stylesheet" href="css/create-quizz.css" />
+    <link rel="stylesheet" href="css/quizz-list.css" />
   </head>
   <body>
     <div id="app">
       <header class="buzzquizz-header">
         <h1 class="title">BuzzQuizz</h1>
       </header>
+
       <div class="container-pages">
-        <div class="container-lista-quizzes hide">
+        <div class="container-lista-quizzes">
           <!-- PAGINA DA LISTA DE QUIZ -->
+          <section class="no-quizzes hide">
+            <h2>Você não criou nenhum quizz ainda :(</h2>
+            <button onclick="">Criar Quizz</button>
+          </section>
+
+          <section class="your-quizzes">
+            <h2>
+              Seus Quizzes<ion-icon onclick="" name="add-circle"></ion-icon>
+            </h2>
+            <div>
+              <figure>
+                <img
+                  src="images/hogwarts.png"
+                  alt="Imagem não suportada ou indisponível"
+                />
+                <figcaption>O quão Potterhead é você?</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="images/hogwarts.png"
+                  alt="Imagem não suportada ou indisponível"
+                />
+                <figcaption>O quão Potterhead é você?</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="images/hogwarts.png"
+                  alt="Imagem não suportada ou indisponível"
+                />
+                <figcaption>O quão Potterhead é você?</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="images/hogwarts.png"
+                  alt="Imagem não suportada ou indisponível"
+                />
+                <figcaption>O quão Potterhead é você?</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section class="all-quizzes">
+            <h2>Todos os Quizzes</h2>
+            <div>
+              <figure>
+                <img
+                  src="images/answer.png"
+                  alt="Imagem não suportada ou indisponível"
+                />
+                <figcaption>
+                  Acerte os personagens corretos dos Simpsons e prove seu amor!
+                </figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="images/hogwarts.png"
+                  alt="Imagem não suportada ou indisponível"
+                />
+                <figcaption>
+                  Acerte os personagens corretos dos Simpsons e prove seu amor!
+                </figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="images/cat.png"
+                  alt="Imagem não suportada ou indisponível"
+                />
+                <figcaption>O quão Potterhead é você?</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="images/hogwarts.png"
+                  alt="Imagem não suportada ou indisponível"
+                />
+                <figcaption>O quão Potterhead é você?</figcaption>
+              </figure>
+            </div>
+          </section>
         </div>
-        <div class="container-pagina-quizz hide">
-          <!-- PAGINA DE UM QUIZ -->
-        </div>
-        <div class="container-create-quizz">
+
+        <div class="container-answer-quizz hide"></div>
+
+        <div class="container-create-quizz hide">
           <div class="quizz-init">
             <h1 class="title">Comece pelo começo</h1>
             <form class="buzzquizz-form" id="form-init">
@@ -73,7 +155,16 @@
         </div>
       </div>
     </div>
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js/answerQuizz.js"></script>
     <script src="./js/createQuizz.js"></script>
     <script src="./js/index.js"></script>
   </body>
