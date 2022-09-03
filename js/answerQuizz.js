@@ -20,6 +20,36 @@ let quizzTeste = {
             "https://tocadobichomaringa.com.br/wp-content/uploads/2021/10/poodle-branco.jpg",
           isCorrectAnswer: false,
         },
+        {
+          text: "Bichon Frisé",
+          image:
+            "https://www.animalsforsale.com.br/components/com_djclassifieds/images/item/3261_3261_bichon-frise-3_thb_thb.jpg",
+          isCorrectAnswer: true,
+        },
+        {
+          text: "Poodle",
+          image:
+            "https://tocadobichomaringa.com.br/wp-content/uploads/2021/10/poodle-branco.jpg",
+          isCorrectAnswer: false,
+        },
+      ],
+    },
+    {
+      title: "Qual o dogginho mais fofo?",
+      color: "#a55555",
+      answers: [
+        {
+          text: "Bichon Frisé",
+          image:
+            "https://www.animalsforsale.com.br/components/com_djclassifieds/images/item/3261_3261_bichon-frise-3_thb_thb.jpg",
+          isCorrectAnswer: true,
+        },
+        {
+          text: "Poodle",
+          image:
+            "https://tocadobichomaringa.com.br/wp-content/uploads/2021/10/poodle-branco.jpg",
+          isCorrectAnswer: false,
+        },
       ],
     },
     {
@@ -82,7 +112,7 @@ function comparador() {
 }
 
 let idDelayScroll = 0;
-
+let flagScroll = false;
 let boxQuizz;
 
 let correctQuizzAnswers = [];
@@ -223,12 +253,20 @@ function loadHomeScreen() {
 // Action when select a option
 // **********************************
 function selectOptionQuestion(elementOption) {
-  const parentElement = elementOption.parentElement;
-  // Allow only one attempt
-  if (parentElement.classList.contains("answered")) {
+  const boxOptions = elementOption.parentElement;
+  const elementQuestion = boxOptions.parentElement;
+
+  // Reset auto scroll: Disable auto-scroll if user click before automatic Scroll.
+  if (flagScroll) {
+    flagScroll = false;
+    clearInterval(idDelayScroll);
+  }
+
+  // Allow only one attempt fo question
+  if (elementQuestion.classList.contains("answered")) {
     return;
   } else {
-    parentElement.classList.add("answered");
+    elementQuestion.classList.add("answered");
     numberOfQuestionsAnswered++;
 
     // Get the question of the selected option
@@ -241,7 +279,7 @@ function selectOptionQuestion(elementOption) {
     }
     // console.log(questionSelected);
 
-    const optionsElements = parentElement.querySelectorAll(".question-option");
+    const optionsElements = boxOptions.querySelectorAll(".question-option");
     optionsElements.forEach((element, optionNumber) => {
       // Show correct and wrong answer
       if (correctQuizzAnswers[questionSelected].includes(optionNumber)) {
@@ -259,16 +297,29 @@ function selectOptionQuestion(elementOption) {
       }
     });
 
+    let elementToScroll;
+    // Check if Quizz is complete
     if (numberOfQuestionsAnswered === numberOfQuestions) {
       scoreQuizz = Math.round((scoreQuizz / numberOfQuestions) * 100);
+      // Show Result
       refreshResult();
-      document.querySelector(".box-answer").classList.remove("hide");
+      const elementResult = document.querySelector(".box-answer");
+      elementResult.classList.remove("hide");
+
+      // Scroll to result box
+      elementToScroll = elementResult;
+    } else {
+      // Scroll to next question
+      elementToScroll = elementQuestion.nextElementSibling;
     }
 
-    // console.log(scoreQuizz);
-    const nextQuestion = parentElement.parentElement.nextElementSibling;
-    // console.log(nextQuestion);
-    idDelayScroll = setInterval(showNextQuestion, 2000, nextQuestion);
+    const isNextQuestionAnswered =
+      elementToScroll.classList.contains("answered");
+    // Start time to scroll next question or result (Only scroll to next question if it unanswered)
+    if (!isNextQuestionAnswered) {
+      idDelayScroll = setInterval(showNextQuestion, 2000, elementToScroll);
+      flagScroll = true;
+    }
   }
 }
 
@@ -295,12 +346,13 @@ function refreshResult() {
 
 // Scroll to Next Question After 2s
 function showNextQuestion(elementToShow) {
-  clearInterval(idDelayScroll);
-  // console.log(elementToShow);
+  console.log(elementToShow);
   elementToShow.scrollIntoView({
     behavior: "smooth",
     block: "center",
   });
+  flagScroll = false;
+  clearInterval(idDelayScroll);
 }
 
 // **********************************
