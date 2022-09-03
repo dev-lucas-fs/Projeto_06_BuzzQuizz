@@ -130,7 +130,7 @@ function loadQuizzScreen() {
   const screenQuizz = document.querySelector(".container-answer-quizz");
   screenQuizz.classList.remove("hide");
 
-  const screenList = document.querySelector(".container-list-quizzes");
+  const screenList = document.querySelector(".container-quizz-list");
   screenList.classList.add("hide");
 
   const screenCreate = document.querySelector(".container-create-quizz");
@@ -239,7 +239,7 @@ function loadResult() {
 
 function loadHomeScreen() {
   console.log("Executando funcao loadQuizzScreen");
-  const screenList = document.querySelector(".container-list-quizzes");
+  const screenList = document.querySelector(".container-quizz-list");
   screenList.classList.remove("hide");
 
   const screenQuizz = document.querySelector(".container-answer-quizz");
