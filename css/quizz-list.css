@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: center;
 }
-
+  
 .no-quizzes h2 {
     margin-bottom: 30px;
     width: 250px;
@@ -19,8 +19,9 @@
     text-align: center;
     color: #b9b9b9;
 }
-
+  
 .no-quizzes button {
+    cursor: pointer;
     width: 151px;
     height: 40px;
     border: 1px dashed #ec362d;
@@ -31,35 +32,36 @@
     line-height: 25px;
     color: #ec362d;
 }
-
+  
 .your-quizzes {
     margin: 134px auto 48px auto;
     width: 1066px;
 }
-
+  
 .your-quizzes h2 {
     margin-bottom: 3px;
     margin-left: 7.5px;
     display: flex;
     align-items: center;
 }
-
+  
 ion-icon[name="add-circle"] {
+    cursor: pointer;
     margin-left: 10px;
     font-size: 31px;
     color: #ec362d;
 }
-
+  
 .all-quizzes {
     margin: 0 auto;
     width: 1066px;
 }
-
+  
 .all-quizzes h2 {
     margin-bottom: 6px;
     margin-left: 7.5px;
 }
-
+  
 .your-quizzes h2,
 .all-quizzes h2 {
     font-weight: 700;
@@ -67,23 +69,24 @@ ion-icon[name="add-circle"] {
     line-height: 23px;
     color: #000000;
 }
-
+  
 .your-quizzes div,
 .all-quizzes div {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
-
+  
 .your-quizzes div figure,
 .all-quizzes div figure {
+    cursor: pointer;
     position: relative;
     margin: 6px 7.5px;
     width: 340px;
     height: 181px;
     border-radius: 5px;
 }
-
+  
 .your-quizzes div figure::after,
 .all-quizzes div figure::after {
     content: "";
@@ -93,16 +96,21 @@ ion-icon[name="add-circle"] {
     width: 100%;
     height: 100%;
     border-radius: 5px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.3) 65%, rgba(0, 0, 0, 0.8) 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(0, 0, 0, 0.3) 65%,
+      rgba(0, 0, 0, 0.8) 100%
+    );
 }
-
+  
 .your-quizzes div figure img,
 .all-quizzes div figure img {
     width: 100%;
     height: 100%;
     border-radius: 5px;
 }
-
+  
 .your-quizzes div figure figcaption,
 .all-quizzes div figure figcaption {
     position: absolute;
@@ -110,46 +118,49 @@ ion-icon[name="add-circle"] {
     bottom: 7px;
     left: 18px;
     right: 18px;
+    width: 304;
     height: 54px;
+    padding: 8px 0;
     font-weight: 400;
     font-size: 19px;
     line-height: 22px;
+    word-wrap: break-word;
+    overflow: hidden;
     color: #ffffff;
-    display: flex;
-    align-items: center;
 }
-
+  
 @media (max-width: 1100px) {
     .no-quizzes {
         margin-top: 100px;
         margin-bottom: 38px;
         width: 90%;
     }
-
+  
     .your-quizzes {
         margin-top: 100px;
         margin-bottom: 35px;
         width: 90%;
     }
-
+  
     ion-icon[name="add-circle"] {
         margin: 0 0 0 auto;
     }
-
+  
     .all-quizzes {
         width: 90%;
     }
 }
-
+  
 @media (max-width: 600px) {
     .your-quizzes h2,
     .all-quizzes h2 {
         margin-left: 0;
     }
-
+  
     .your-quizzes div figure,
     .all-quizzes div figure {
         margin-right: 0;
         margin-left: 0;
     }
 }
+  
