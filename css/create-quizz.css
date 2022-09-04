@@ -174,6 +174,54 @@
   gap: 20px;
 }
 
+.quizz-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.quizz-success .container-img {
+  width: 100%;
+  display: flex;
+  position: relative;
+  border-radius: 5px;
+}
+
+.quizz-success .container-img .filter {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+  position: absolute;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url(image.png);
+}
+
+.quizz-success .container-img img {
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: calc(16/9);
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.button-group button {
+  padding: 20px 40px;
+}
+
+.button-group button:nth-child(2) {
+  border: 0;
+  background: transparent;
+  padding: 10px;
+}
+
 @media screen and (min-width: 1100px) {
   .container-create-quizz .quizz-init {
     max-width: 600px;

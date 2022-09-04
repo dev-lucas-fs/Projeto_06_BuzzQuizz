@@ -27,6 +27,11 @@ function showCreateQuizzQuestions() {
   renderQuestionForms();
 }
 
+function showCreateQuizz() {
+  toggleHideElement(document.querySelector(".container-quizz-list"));
+  toggleHideElement(document.querySelector(".container-create-quizz"));
+}
+
 function setQuizzConfigInitQuizz(elements) {
   quizz_config.image = elements["image"].value;
   quizz_config.levels = Array.from(
@@ -398,7 +403,23 @@ formLevel.onsubmit = (e) => {
 
 function showSuccessQuizz() {
   document.querySelector(".quizz-levels").classList.add("hide");
-  document.querySelector(".quizz-success").classList.remove("hide");
+  const quizzSuccess = document.querySelector(".quizz-success");
+  quizzSuccess.classList.remove("hide");
+  let quizz = JSON.parse(localStorage.quizzes);
+  quizz = quizz[quizz.length - 1];
+  quizzSuccess.querySelector("img").src = quizz.image;
+  quizzSuccess.querySelector("h1").textContent = quizz.title;
+}
+
+function viewQuizz() {
+  let quizz = JSON.parse(localStorage.quizzes);
+  quizz = quizz[quizz.length - 1];
+  quizzToAnswer = quizz;
+  loadQuizzScreen();
+}
+
+function backToHome() {
+  window.location.reload();
 }
 
 function createQuizzAPI(fn) {
@@ -411,3 +432,5 @@ function createQuizzAPI(fn) {
     })
     .catch((e) => console.log(e));
 }
+
+showCreateQuizz();
