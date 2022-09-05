@@ -374,6 +374,7 @@ function isLevelForm(levelForm) {
 }
 
 function toggleDisable(e) {
+  console.log(e);
   if (e.disabled === true) {
     e.disabled = false;
   } else {
@@ -381,47 +382,56 @@ function toggleDisable(e) {
   }
 }
 
+let formLevelWaiting = true;
+
 formLevel.onsubmit = (e) => {
   e.preventDefault();
+  if (formLevelWaiting) {
+    formLevelWaiting = false;
+    let levels = [];
+    const inputsContainer = formLevel.querySelectorAll(".container");
 
-  let levels = [];
-  const inputsContainer = formLevel.querySelectorAll(".container");
+    for (let i = 0; i < inputsContainer.length; i++) {
+      const level = isLevelForm(inputsContainer[i]);
 
-  for (let i = 0; i < inputsContainer.length; i++) {
-    const level = isLevelForm(inputsContainer[i]);
+      if (!level) {
+        alert("Preencha os dados corretamente");
+        levels = [];
+        formLevelWaiting = true;
+        return;
+      }
 
-    if (!level) {
+      levels.push(level);
+    }
+
+    const minValues = levels.map(({ minValue }) => minValue);
+    const UniqueMinValues = minValues.filter(
+      (value, i, array) => array.indexOf(value) === i
+    );
+
+    if (minValues.length !== UniqueMinValues.length) {
       alert("Preencha os dados corretamente");
-      levels = [];
+      formLevelWaiting = true;
       return;
     }
 
-    levels.push(level);
+    if (!minValues.includes(0)) {
+      alert("Preencha os dados corretamente");
+      formLevelWaiting = true;
+      return;
+    }
+
+    quizz_config.levels = levels;
+    createQuizzAPI((res) => {
+      const items = localStorage.quizzes
+        ? JSON.parse(localStorage.quizzes)
+        : [];
+      items.push(res.data);
+      localStorage.setItem("quizzes", JSON.stringify(items));
+      showSuccessQuizz();
+      formLevelWaiting = true;
+    });
   }
-
-  const minValues = levels.map(({ minValue }) => minValue);
-  const UniqueMinValues = minValues.filter(
-    (value, i, array) => array.indexOf(value) === i
-  );
-
-  if (minValues.length !== UniqueMinValues.length) {
-    alert("Preencha os dados corretamente");
-    return;
-  }
-
-  if (!minValues.includes(0)) {
-    alert("Preencha os dados corretamente");
-    return;
-  }
-
-  quizz_config.levels = levels;
-  createQuizzAPI((res) => {
-    toggleDisable(e.target);
-    const items = localStorage.quizzes ? JSON.parse(localStorage.quizzes) : [];
-    items.push(res.data);
-    localStorage.setItem("quizzes", JSON.stringify(items));
-    showSuccessQuizz();
-  });
 };
 
 function showSuccessQuizz() {
