@@ -127,10 +127,12 @@
 
 .right-option {
   color: #009c22;
+  cursor: default;
 }
 
 .wrong-option {
   color: #ff4b4b;
+  cursor: default;
 }
 
 .btn-restart {

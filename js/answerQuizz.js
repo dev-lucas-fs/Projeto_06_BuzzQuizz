@@ -83,7 +83,7 @@ function renderQuestions(question, questionNumber) {
   <div class="quizz-question unanswered-question">
     <div class="question-header "
     style="background-color: ${question.color};">
-      <h3 class="question-title">${question.title}</h3>
+      <h3 class="question-title" data-identifier="question">${question.title}</h3>
     </div>
     <div class="box-question-options">      
     </div>
@@ -97,7 +97,7 @@ function renderQuestions(question, questionNumber) {
   );
   question.answers.sort(comparador).forEach((option, optionNumber) => {
     boxOptions.innerHTML += `
-    <div class="question-option ${questionNumber} " onclick="selectOptionQuestion(this)">
+    <div class="question-option ${questionNumber} " onclick="selectOptionQuestion(this)" data-identifier="answer">
       <img class="option-img" src=${option.image} alt="Imagem não suportada ou indisponível" />
       <span class="option-text">${option.text}</span>
     </div>
@@ -149,7 +149,7 @@ function renderResult() {
   });
 
   document.querySelector(".answer-title").innerHTML = `
-    <span class="answer-level-score">${scoreQuizz}</span>% de acerto:
+    <span class="answer-level-score" data-identifier="quizz-result">${scoreQuizz}</span>% de acerto:
     <span class="answer-level-text">${quizzToAnswer.levels[userLevel].title}</span>  
     `;
   document.querySelector(".answer-img").src =
