@@ -244,7 +244,11 @@ function isQuestionForm(questionForm) {
     },
   ];
 
-  for (let i = 1; i < answers.length; i++)
+  for (let i = 1; i < answers.length; i++) {
+    if (!isAnswerText(answers[i].text.value) && isUrl(answers[i].image.value))
+      return false;
+    if (isAnswerText(answers[i].text.value) && !isUrl(answers[i].image.value))
+      return false;
     if (isAnswerText(answers[i].text.value) && isUrl(answers[i].image.value)) {
       min++;
       question.answers.push({
@@ -253,6 +257,7 @@ function isQuestionForm(questionForm) {
         isCorrectAnswer: false,
       });
     }
+  }
 
   if (min < 1) return false;
 
