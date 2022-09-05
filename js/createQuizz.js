@@ -189,6 +189,11 @@ const questionForm = ({ i }) => `
     </div>
 `;
 
+function scrollElementExpandButton(e) {
+  e.scrollIntoView();
+  if (window.scrollY) window.scroll(0, window.scrollY - 80);
+}
+
 function expandButton(e) {
   const parent = e.parentNode.parentNode;
   const form = document.querySelectorAll("#form-question > .container");
@@ -196,7 +201,8 @@ function expandButton(e) {
     element.classList.add("close");
   });
   parent.classList.remove("close");
-  parent.scrollIntoView();
+
+  scrollElementExpandButton(parent);
 }
 
 function renderQuestionForms() {
