@@ -6,8 +6,10 @@ const isUrl = (url) => {
     /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/;
   return regexURL.test(url);
 };
-const isQuestionNumber = (questionNumber) => questionNumber >= 3;
-const isLevelNumber = (levelNumber) => levelNumber >= 2;
+const isQuestionNumber = (questionNumber) =>
+  Number(questionNumber) >= 3 && /^[0-9]+$/.test(questionNumber);
+const isLevelNumber = (levelNumber) =>
+  Number(levelNumber) >= 2 && /^[0-9]+$/.test(levelNumber);
 
 const initValidations = {
   title: isTitle,
@@ -303,7 +305,7 @@ const buzzquizzTextArea = ({ placeholder, dataName = "" }) => `
 
 function levelForm({ i }) {
   return `
-    <div class='container ${i === 1 ? "" : "close"}'>
+    <div class='container ${i === 1 ? "" : "close"}' >
       <div class='container-title'>
         <h1 class='title'>Nível ${i}</h1>
         <ion-icon onclick='expandButton(this)' data-identifier="expand" class='icon' name="create-outline"></ion-icon>
@@ -365,8 +367,17 @@ function isLevelForm(levelForm) {
   };
 }
 
+function toggleDisable(e) {
+  if (e.disabled === true) {
+    e.disabled = false;
+  } else {
+    e.disabled = true;
+  }
+}
+
 formLevel.onsubmit = (e) => {
   e.preventDefault();
+
   let levels = [];
   const inputsContainer = formLevel.querySelectorAll(".container");
 
@@ -399,6 +410,7 @@ formLevel.onsubmit = (e) => {
 
   quizz_config.levels = levels;
   createQuizzAPI((res) => {
+    toggleDisable(e.target);
     const items = localStorage.quizzes ? JSON.parse(localStorage.quizzes) : [];
     items.push(res.data);
     localStorage.setItem("quizzes", JSON.stringify(items));

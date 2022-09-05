@@ -5,6 +5,14 @@
   padding: 40px 0;
 }
 
+.container-create-quizz button {
+  cursor: pointer;
+}
+
+.container-create-quizz .icon {
+  cursor: pointer;
+}
+
 .container-create-quizz .quizz-init {
   width: 100%;
   display: flex;
@@ -86,6 +94,7 @@
   display: none;
   font-size: 26px;
   color: #000;
+  cursor: pointer;
 }
 
 .quizz-questions form .container.close .container-title .icon {
@@ -155,6 +164,7 @@
   display: none;
   font-size: 26px;
   color: #000;
+  cursor: pointer;
 }
 
 .quizz-levels #form-level .container.close .container-title .icon  {
@@ -214,6 +224,7 @@
 
 .button-group button {
   padding: 20px 40px;
+  cursor: pointer;
 }
 
 .button-group button:nth-child(2) {
@@ -223,6 +234,7 @@
   color: #818181;
   font-size: 18px;
   font-weight: 400;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 1100px) {
